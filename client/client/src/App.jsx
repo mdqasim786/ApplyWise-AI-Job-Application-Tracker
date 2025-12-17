@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { LandingPage } from './Pages/LandingPage.jsx'
+import { Contact } from './Pages/Contact.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 
@@ -10,6 +10,7 @@ function App() {
         <Router>
           <Routes>
             <Route path='/' element={<LandingPage />} />
+            <Route path='/contact' element={<Contact />} />
           </Routes>
         </Router>
       </div>
