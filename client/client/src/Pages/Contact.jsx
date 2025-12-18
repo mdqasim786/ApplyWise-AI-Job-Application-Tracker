@@ -1,12 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/header.jsx';
+import React from 'react';
 import { useEffect } from 'react';
+import useMobileMenu from '../hooks/useMobileMenu.js';
 
 function Contact() {
   const navigate = useNavigate();
+  const {mobileMenuOpen, setMobileMenuOpen} = useMobileMenu();
+
   return (
     <>
-      <Header />
+      <Header 
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+      />
 
       <div className="bg-gradient-to-b from-blue-200 to-white">
         <div className="max-w-6xl mx-auto py-6 px-6">
