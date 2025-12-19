@@ -23,10 +23,10 @@ function Features(){
 
         {/* Cards For defining features */}
         {/* Card 1 */}
-        <div className='ml-13 flex'>
+        <div className='ml-13 flex flex-wrap mt-10'>
           <div className="w-70">
-            <div className="bg-white shadow-2xl rounded-lg p-4">
-              <h2 className="text-xl font-bold text-gray-900 mb-2"> 🔐 Secure Authentication</h2>
+            <div className="bg-white shadow-xl rounded-lg p-4 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
+              <h2 className="text-xl font-bold text-gray-900 mb-2">Secure Authentication</h2>
                 <h3 className="text-lg font-semibold text-blue-500">Key Features</h3>
                   <ul className="list-disc list-inside mt-2 text-gray-600">
                     <li>JWT-based authentication</li>
@@ -39,11 +39,11 @@ function Features(){
 
           {/* Card 2 */}
           <div className="w-70 ml-20">
-            <div className="bg-white shadow-2xl rounded-lg p-4">
+            <div className="bg-white shadow-xl rounded-lg p-4 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
               <h2 className="text-xl font-bold text-gray-900 mb-2">Job Application Tracking</h2>
                 <h3 className="text-lg font-semibold text-blue-500">Key Features</h3>
                   <ul className="list-disc list-inside mt-2 text-gray-600">
-                    <li>Add and manage job applications</li>
+                    <li>Add and manage job Applications</li>
                     <li>Track status (Applied, Rejected)</li>
                     <li>Notes and follow-ups</li>
                   </ul>
@@ -52,7 +52,7 @@ function Features(){
 
           {/* Card 3 */}
           <div className="w-70 ml-20">
-            <div className="bg-white shadow-2xl rounded-lg p-4">
+            <div className="bg-white shadow-xl rounded-lg p-4 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
               <h2 className="text-xl font-bold text-gray-900 mb-2"> Analytics Dashboard</h2>
                 <h3 className="text-lg font-semibold text-blue-500">Key Features</h3>
                   <ul className="list-disc list-inside mt-2 text-gray-600">
@@ -63,6 +63,47 @@ function Features(){
                   </ul>
             </div>
           </div>
+
+          {/* Card 4 */}
+          <div className='mt-10 flex'>
+          <div className="w-70">
+            <div className="bg-white shadow-xl rounded-lg p-4 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
+              <h2 className="text-xl font-bold text-gray-900 mb-2">AI-Powered Assistance</h2>
+                <h3 className="text-lg font-semibold text-blue-500">Key Features</h3>
+                  <ul className="list-disc list-inside mt-2 text-gray-600">
+                    <li>Resume feedback</li>
+                    <li>Cover letter generation</li>
+                    <li>Context-aware suggestions</li>
+                  </ul>
+            </div>
+          </div>
+
+          {/* Card 5 */}
+          <div className="w-70 ml-20">
+            <div className="bg-white shadow-xl rounded-lg p-4 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover: cursor-pointer">
+              <h2 className="text-xl font-bold text-gray-900 mb-2">RESTful Architecture</h2>
+                <h3 className="text-lg font-semibold text-blue-500">Key Features</h3>
+                  <ul className="list-disc list-inside mt-2 text-gray-600">
+                    <li>Well-structured APIs</li>
+                    <li>Scalable backend design</li>
+                    <li>Clear separation of concerns</li>
+                  </ul>
+            </div>
+          </div>
+
+          {/* Card 6 */}
+          <div className="w-70 ml-20">
+            <div className="bg-white shadow-xl rounded-lg p-4 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
+              <h2 className="text-xl font-bold text-gray-900 mb-2">User-Focused Workflow</h2>
+                <h3 className="text-lg font-semibold text-blue-500">Key Features</h3>
+                  <ul className="list-disc list-inside mt-2 text-gray-600">
+                    <li>Designed for real job hunts</li>
+                    <li>Minimal friction</li>
+                    <li>Productivity-driven UI</li>
+                  </ul>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
