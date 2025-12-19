@@ -3,18 +3,77 @@ import Header from '../components/header.jsx';
 function Features(){
   return (
     <>
-      <Header />
-      <div className="bg-gradient-to-b from-blue-300 to-white">
-        <div className="max-w-6xl mx-auto py-10 px-6">
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">
-            Features Page
+    <Header />
+
+    <div className="bg-gradient-to-b from-blue-300 via-blue-300 to-white">
+      <div className="max-w-6xl mx-auto py-6 px-6">
+        <div className="text-center mb-6">
+          <span className="inline-block mb-4 px-4 py-1 text-sm font-medium text-blue-700 bg-blue-100 rounded-full">
+            What is ApplyWise?
+          </span>
+
+          <h1 className="text-4xl md:text-4xl font-bold text-gray-900">
+            Powerful Features Built for <span className="text-blue-500">Modern Job Seekers</span>
           </h1>
-          <p className="text-gray-700">
-            This is where the features of the application will be showcased.
+
+          <p className="mt-4 max-w-1xl mx-auto text-lg text-gray-600">
+            ApplyWise combines secure architecture, real-world workflows, and AI to help you track and improve your job applications efficiently.
           </p>
         </div>
+
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold text-blue-700">Email</h3>
+              <p className="text-gray-600 mt-1">support@applywise.com</p>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold text-blue-700">Phone</h3>
+              <p className="text-gray-600 mt-1">+92 300 1234567</p>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold text-blue-700">Website</h3>
+              <p className="text-gray-600 mt-1">www.applywise.com</p>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold text-blue-700">Location</h3>
+              <p className="text-gray-600 mt-1">Pakistan</p>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-6">
+              Follow Us
+            </h3>
+
+            <div className="flex gap-6">
+              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-white shadow hover:shadow-md transition cursor-pointer">
+                <span className="text-blue-600 font-bold text-lg">in</span>
+              </div>
+
+              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-white shadow hover:shadow-md transition cursor-pointer">
+                <span className="text-pink-500 font-bold text-lg">IG</span>
+              </div>
+
+              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-white shadow hover:shadow-md transition cursor-pointer">
+                <span className="text-blue-700 font-bold text-lg">f</span>
+              </div>
+
+              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-white shadow hover:shadow-md transition cursor-pointer">
+                <span className="text-black font-bold text-lg">X</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
       </div>
-    </>
+    </div>
+  </>
   );
 }
 
