@@ -15,7 +15,7 @@ function Contact() {
         setMobileMenuOpen={setMobileMenuOpen}
       />
 
-      <div className="bg-gradient-to-b from-blue-300 via-blue-300 to-white">
+      <div className="bg-gradient-to-b from-blue-300 via-blue-200 to-gray-200">
         <div className="max-w-6xl mx-auto py-6 px-6">
           <div className="text-center mb-6">
             <span className="inline-block mb-4 px-4 py-1 text-sm font-medium text-blue-700 bg-blue-100 rounded-full">
