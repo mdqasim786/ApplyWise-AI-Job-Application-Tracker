@@ -147,7 +147,7 @@ function Features(){
             </p>
           </div>
 
-          <div className="p-5 ml-1 mr-2 mt-3 hover:cursor-pointer border-gray-800 rounded-xl bg-gray-800 shadow-2xl transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 border-3  hover:border-white">
+          <div className="p-5 ml-1 mb-15 mr-2 mt-3 hover:cursor-pointer border-gray-800 rounded-xl bg-gray-800 shadow-2xl transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 border-3  hover:border-white">
             <h3 className="text-lg font-semibold text-blue-500">
               Secure Architecture
             </h3>
@@ -158,6 +158,61 @@ function Features(){
               reduce common security risks.
             </p>
           </div>
+          <hr></hr>
+        {/* Tech Stack Section */}
+      <div className="max-w-6xl mx-auto px-6 py-10 mt-10">
+        <h1 className="text-3xl md:text-4xl text-center font-bold text-gray-900">
+          Tech <span className="text-blue-500">Stack</span>
+        </h1>
+      <div className="flex justify-center mt-4">
+        <span className="px-4 py-1 text-sm font-medium text-blue-700 bg-blue-100 rounded-full">
+          Built With Modern Technologies
+        </span>
+      </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 mb-10">
+    
+    <div className="bg-white shadow-xl rounded-lg p-4 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
+      <h2 className="text-xl font-bold text-gray-900 mb-2">React + Tailwind</h2>
+      <h3 className="text-lg font-semibold text-blue-500">Frontend</h3>
+      <p className="mt-2 text-gray-600">
+        Modern UI with component-based architecture
+      </p>
+    </div>
+
+    <div className="bg-white shadow-xl rounded-lg p-4 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
+      <h2 className="text-xl font-bold text-gray-900 mb-2">Node.js + Express</h2>
+      <h3 className="text-lg font-semibold text-blue-500">Backend</h3>
+      <p className="mt-2 text-gray-600">
+        Fast and scalable server-side framework
+      </p>
+    </div>
+
+    <div className="bg-white shadow-xl rounded-lg p-4 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
+      <h2 className="text-xl font-bold text-gray-900 mb-2">MongoDB</h2>
+      <h3 className="text-lg font-semibold text-blue-500">Database</h3>
+      <p className="mt-2 text-gray-600">
+        Flexible NoSQL database for efficient storage
+      </p>
+    </div>
+
+    <div className="bg-white shadow-xl rounded-lg p-4 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
+      <h2 className="text-xl font-bold text-gray-900 mb-2">JWT Authentication</h2>
+      <h3 className="text-lg font-semibold text-blue-500">Security</h3>
+      <p className="mt-2 text-gray-600">
+        Secure token-based user authentication
+      </p>
+    </div>
+
+    <div className="bg-white shadow-xl rounded-lg p-4 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
+      <h2 className="text-xl font-bold text-gray-900 mb-2">AI Integration</h2>
+      <h3 className="text-lg font-semibold text-blue-500">Intelligence</h3>
+      <p className="mt-2 text-gray-600">
+        Smart suggestions and resume feedback
+      </p>
+    </div>
+  </div>
+</div>
       </div>
   </>
   );
