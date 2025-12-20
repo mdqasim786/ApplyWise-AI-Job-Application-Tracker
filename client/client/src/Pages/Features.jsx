@@ -23,7 +23,7 @@ function Features(){
 
         {/* Cards For defining features */}
         {/* Card 1 */}
-        <div className='ml-13 flex flex-wrap mt-10'>
+        <div className='ml-13 flex flex-wrap mt-10 mb-10'>
           <div className="w-70">
             <div className="bg-white shadow-xl rounded-lg p-4 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
               <h2 className="text-xl font-bold text-gray-900 mb-2">Secure Authentication</h2>
@@ -106,7 +106,28 @@ function Features(){
         </div>
         </div>
       </div>
-    </div>
+      <hr></hr>
+
+      {/* Section 2 */}
+      <div className="max-w-6xl mx-auto px-6 py-10"></div>
+        <h1 className="text-3xl md:text-4xl text-center font-bold text-gray-900">
+          Security & <span className="text-blue-500">Privacy</span>
+        </h1>
+        <div className="flex justify-center mt-4">
+          <span className="px-4 py-1 text-sm font-medium text-blue-700 bg-blue-100 rounded-full">
+            Security First
+          </span>
+        </div>
+        <p className="mt-6 max-w-3xl mx-auto text-center text-gray-600">
+          ApplyWise is designed with security and privacy at its core. User data is
+          protected through modern authentication practices and strict access control.
+        </p>
+
+        {/* Security Grid */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        </div>
+      </div>
   </>
   );
 }
