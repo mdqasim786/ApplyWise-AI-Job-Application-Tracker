@@ -124,9 +124,40 @@ function Features(){
         </p>
 
         {/* Security Grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="p-5 ml-1 mr-2 mt-5 hover:cursor-pointer border-gray-800 rounded-xl bg-gray-800 shadow-2xl transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 border-3  hover:border-white">
+            <h3 className="text-lg font-semibold text-blue-500">
+              Secure Authentication
+            </h3>
+            <p className="mt-2 text-white">
+              ApplyWise uses modern authentication practices to ensure that only
+              verified users can access the platform. Secure login mechanisms,
+              protected sessions, and token-based authentication help prevent
+              unauthorized access while maintaining a smooth user experience.
+            </p>
+          </div>
 
-        </div>
+          <div className="p-5 ml-1 mr-2 mt-3 hover:cursor-pointer border-gray-800 rounded-xl bg-gray-800 shadow-2xl transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 border-3  hover:border-white">
+            <h3 className="text-lg font-semibold text-blue-500">
+              Private User Data
+            </h3>
+            <p className="mt-2 text-white">
+              Each user’s job applications, analytics, and AI-generated insights are
+              strictly private and isolated. Data is never shared publicly and is
+              accessible only to the authenticated account owner.
+            </p>
+          </div>
+
+          <div className="p-5 ml-1 mr-2 mt-3 hover:cursor-pointer border-gray-800 rounded-xl bg-gray-800 shadow-2xl transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 border-3  hover:border-white">
+            <h3 className="text-lg font-semibold text-blue-500">
+              Secure Architecture
+            </h3>
+            <p className="mt-2 text-white">
+              ApplyWise is designed with a clean and scalable backend architecture
+              that follows security best practices. Clear separation between client
+              and server, controlled API access, and validation at every layer help
+              reduce common security risks.
+            </p>
+          </div>
       </div>
   </>
   );
