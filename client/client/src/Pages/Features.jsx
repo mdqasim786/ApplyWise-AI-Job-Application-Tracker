@@ -1,5 +1,7 @@
 import Header from '../components/header.jsx';
 import useMobileMenu from '../hooks/useMobileMenu';
+import FeatureCard from '../components/featurecard.jsx';
+import { features } from '../data/featuresdata.js';
 
 function Features(){
   const { mobileMenuOpen, setMobileMenuOpen } = useMobileMenu();
@@ -29,77 +31,13 @@ function Features(){
 
         {/* Cards For defining features */}
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-10 mb-6 sm:mb-10'>
-          
-          {/* Card 1 */}
-          <div className="bg-white shadow-xl rounded-lg p-4 sm:p-5 md:p-6 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Secure Authentication</h2>
-            <h3 className="text-base sm:text-lg font-semibold text-blue-500">Key Features</h3>
-            <ul className="list-disc list-inside mt-2 text-sm sm:text-base text-gray-600 space-y-1">
-              <li>JWT-based authentication</li>
-              <li>Protected routes</li>
-              <li>User-specific data access</li>
-              <li>Privacy-first design</li>
-            </ul>
-          </div>
 
-          {/* Card 2 */}
-          <div className="bg-white shadow-xl rounded-lg p-4 sm:p-5 md:p-6 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Job Application Tracking</h2>
-            <h3 className="text-base sm:text-lg font-semibold text-blue-500">Key Features</h3>
-            <ul className="list-disc list-inside mt-2 text-sm sm:text-base text-gray-600 space-y-1">
-              <li>Add and manage job Applications</li>
-              <li>Track status (Applied, Rejected)</li>
-              <li>Notes and follow-ups</li>
-            </ul>
-          </div>
+        {features.map((feature, index) => (
+          <FeatureCard key={index} {...feature} />
+        ))}
 
-          {/* Card 3 */}
-          <div className="bg-white shadow-xl rounded-lg p-4 sm:p-5 md:p-6 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Analytics Dashboard</h2>
-            <h3 className="text-base sm:text-lg font-semibold text-blue-500">Key Features</h3>
-            <ul className="list-disc list-inside mt-2 text-sm sm:text-base text-gray-600 space-y-1">
-              <li>Application statistics</li>
-              <li>Status breakdown</li>
-              <li>Weekly/monthly trends</li>
-              <li>Graphical Representations</li>
-            </ul>
-          </div>
-
-          {/* Card 4 */}
-          <div className="bg-white shadow-xl rounded-lg p-4 sm:p-5 md:p-6 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">AI-Powered Assistance</h2>
-            <h3 className="text-base sm:text-lg font-semibold text-blue-500">Key Features</h3>
-            <ul className="list-disc list-inside mt-2 text-sm sm:text-base text-gray-600 space-y-1">
-              <li>Resume feedback</li>
-              <li>Cover letter generation</li>
-              <li>Context-aware suggestions</li>
-            </ul>
-          </div>
-
-          {/* Card 5 */}
-          <div className="bg-white shadow-xl rounded-lg p-4 sm:p-5 md:p-6 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">RESTful Architecture</h2>
-            <h3 className="text-base sm:text-lg font-semibold text-blue-500">Key Features</h3>
-            <ul className="list-disc list-inside mt-2 text-sm sm:text-base text-gray-600 space-y-1">
-              <li>Well-structured APIs</li>
-              <li>Scalable backend design</li>
-              <li>Clear separation of concerns</li>
-            </ul>
-          </div>
-
-          {/* Card 6 */}
-          <div className="bg-white shadow-xl rounded-lg p-4 sm:p-5 md:p-6 transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-blue-500 hover:cursor-pointer">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">User-Focused Workflow</h2>
-            <h3 className="text-base sm:text-lg font-semibold text-blue-500">Key Features</h3>
-            <ul className="list-disc list-inside mt-2 text-sm sm:text-base text-gray-600 space-y-1">
-              <li>Designed for real job hunts</li>
-              <li>Minimal friction</li>
-              <li>Productivity-driven UI</li>
-            </ul>
-          </div>
         </div>
       </div>
-
       <hr className="border-gray-300"></hr>
 
       {/* Section 2 - Security & Privacy */}
