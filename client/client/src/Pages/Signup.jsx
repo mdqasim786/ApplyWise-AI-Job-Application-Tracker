@@ -1,7 +1,28 @@
 import logo from '../assets/logo.png';
-import 
+import { useState } from 'react';
 
 function Signup(){
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const response = await fetch("http://localhost:5000/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+  
+    const data = await response.json();
+    console.log(data);
+  };  
+
   return(
     <>
       {/* Left Side Form */}
@@ -13,12 +34,17 @@ function Signup(){
           <p className='mt-2 text-sm text-gray-500'>Welcome to ApplyWise - Let's create your account</p>
           <hr className='mt-4 mb-5 text-gray-300'></hr>
           
-          <form className='flex flex-col space-y-3.5'>
+          <form 
+            onSubmit={handleSubmit}
+            className='flex flex-col space-y-3.5'
+          >
             <div>
               <label className='font-medium text-sm block mb-1.5'>Email Address</label>
               <input 
                 type="email" 
                 placeholder='Enter your email' 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className='border border-gray-300 rounded-lg p-2.5 w-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500' 
               />
             </div>
@@ -28,6 +54,8 @@ function Signup(){
               <input 
                 type="password" 
                 placeholder='Create a password' 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className='border border-gray-300 rounded-lg p-2.5 w-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500' 
               />
             </div>
@@ -36,7 +64,7 @@ function Signup(){
               <label className='font-medium text-sm block mb-1.5'>Confirm Password</label>
               <input 
                 type="password" 
-                placeholder='Confirm your password' 
+                placeholder='Confirm your password'
                 className='border border-gray-300 rounded-lg p-2.5 w-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500' 
               />
             </div>
