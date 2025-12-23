@@ -3,11 +3,40 @@ import { useState } from 'react';
 
 function Signup(){
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+    const errors = {};
+    // Email validation
+    if (!email){
+      errors.email = 'Email is required';
+    } else if (!email.includes('@') || !email.includes('.') || !email.includes('.com')){
+      errors.email = 'Please enter a valid email';
+    }
+
+    // Password validation
+    if (!password){
+      errors.password = 'Password is required';
+    }
+    if (password.length < 8) {
+      errors.password = 'Password must be at least 8 characters long';
+    }
+    if (password !== confirmPassword){
+      errors.confirmPassword = 'Passwords do not match';  
+    }
+
+    setEmailError(errors.email || '');
+    setPasswordError(errors.password || '');
+    setConfirmPasswordError(errors.confirmPassword || '');
+
+    if (Object.keys(errors).length > 0) return;
+
     const response = await fetch("http://localhost:5000/api/auth/signup", {
       method: "POST",
       headers: {
@@ -21,6 +50,15 @@ function Signup(){
   
     const data = await response.json();
     console.log(data);
+
+    if (response.ok){
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      setEmailError('');
+      setPasswordError('');
+      setConfirmPasswordError('');
+    }
   };  
 
   return(
@@ -39,38 +77,74 @@ function Signup(){
             className='flex flex-col space-y-3.5'
           >
             <div>
-              <label className='font-medium text-sm block mb-1.5'>Email Address</label>
+              <label className='font-medium text-sm block mb-1.5'>
+                Email Address
+                {emailError && (
+                  <span className="text-red-500 text-xs ml-2">
+                    {emailError}
+                  </span>
+                )}
+                </label>
               <input 
                 type="email" 
                 placeholder='Enter your email' 
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className='border border-gray-300 rounded-lg p-2.5 w-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500' 
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setEmailError('');
+                }}
+                className={`border rounded-lg p-2.5 w-full text-sm focus:outline-none focus:ring-2
+                  ${emailError ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'}`}
               />
             </div>
             
             <div>
-              <label className='font-medium text-sm block mb-1.5'>Password</label>
+              <label className='font-medium text-sm block mb-1.5'>
+                Password
+                {passwordError && (
+                  <span className="text-red-500 text-xs ml-2">
+                    {passwordError}
+                  </span>
+                )}
+                </label>
               <input 
                 type="password" 
                 placeholder='Create a password' 
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className='border border-gray-300 rounded-lg p-2.5 w-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500' 
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setPasswordError('');
+                }}
+                className={`border rounded-lg p-2.5 w-full text-sm focus:outline-none focus:ring-2
+                  ${passwordError ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'}`}
               />
             </div>
             
             <div>
-              <label className='font-medium text-sm block mb-1.5'>Confirm Password</label>
+              <label className='font-medium text-sm block mb-1.5'>
+                Confirm Password
+                {confirmPasswordError && (
+                  <span className="text-red-500 text-xs ml-2">
+                    {confirmPasswordError}
+                  </span>
+                )}
+                </label>
               <input 
                 type="password" 
                 placeholder='Confirm your password'
-                className='border border-gray-300 rounded-lg p-2.5 w-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500' 
+                value={confirmPassword}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                  setConfirmPasswordError('');
+                }}
+                className={`border rounded-lg p-2.5 w-full text-sm focus:outline-none focus:ring-2 
+                  ${confirmPasswordError ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'}`}
               />
             </div>
             
             <button 
               type="submit" 
+              onClick={handleSubmit}
               className='bg-blue-500 text-white rounded-lg p-3 w-full hover:bg-blue-600 transition hover:cursor-pointer font-medium'
             >
               Sign Up
@@ -131,5 +205,4 @@ function Signup(){
     </>
   )
 }
-
 export { Signup };
