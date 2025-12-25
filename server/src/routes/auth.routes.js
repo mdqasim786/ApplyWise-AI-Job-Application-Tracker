@@ -3,7 +3,7 @@ import express from "express";
 const router = express.Router();
 
 router.post("/signup", (req, res) => {
-  res.json({ message: "Signup route working" });
-});
+  res.json({ message: "User signed up" });
+}); 
 
 export default router;
