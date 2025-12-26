@@ -4,14 +4,18 @@ import authRoutes from "./routes/auth.routes.js";
 
 const app = express();
 
-app.use(cors());
+/* 🔥 BODY PARSER — MUST COME BEFORE ROUTES */
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/auth" , authRoutes);
+/* CORS */
+app.use(cors());
+
+/* ROUTES */
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("ApplyWise API running");
 });
-
 
 export default app;

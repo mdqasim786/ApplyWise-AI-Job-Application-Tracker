@@ -16,17 +16,18 @@ function Signup(){
     // Email validation
     if (!email){
       errors.email = 'Email is required';
-    } else if (!email.includes('@') || !email.includes('.') || !email.includes('.com')){
+    } 
+    const emailRegex = /^\S+@\S+\.\S+$/;
+      if (!emailRegex.test(email)) {
       errors.email = 'Please enter a valid email';
     }
 
     // Password validation
-    if (!password){
+    if (!password) {
       errors.password = 'Password is required';
-    }
-    if (password.length < 8) {
+    } else if (password.length < 8) {
       errors.password = 'Password must be at least 8 characters long';
-    }
+    }    
     if (password !== confirmPassword){
       errors.confirmPassword = 'Passwords do not match';  
     }
@@ -144,7 +145,6 @@ function Signup(){
             
             <button 
               type="submit" 
-              onClick={handleSubmit}
               className='bg-blue-500 text-white rounded-lg p-3 w-full hover:bg-blue-600 transition hover:cursor-pointer font-medium'
             >
               Sign Up
