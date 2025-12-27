@@ -8,6 +8,12 @@ function Signup(){
   const [passwordError, setPasswordError] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
+  
+  // Backend States
+  const [serverError, setServerError] = useState('');
+  const [serverSuccess, setServerSuccess] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,6 +44,10 @@ function Signup(){
 
     if (Object.keys(errors).length > 0) return;
 
+    setServerError('');
+    setServerSuccess('');
+    setIsLoading(true);
+
     const response = await fetch("http://localhost:5000/api/auth/signup", {
       method: "POST",
       headers: {
@@ -50,15 +60,21 @@ function Signup(){
     });
   
     const data = await response.json();
-    console.log(data);
+    if (!response.ok) {
+      setServerError(data.message || "Signup failed");
+      setIsLoading(false);
+      return;
+    }
 
     if (response.ok){
+      setServerSuccess("Signup successful! You can now log in.");
       setEmail('');
       setPassword('');
       setConfirmPassword('');
       setEmailError('');
       setPasswordError('');
       setConfirmPasswordError('');
+      setIsLoading(false);
     }
   };  
 
@@ -142,12 +158,26 @@ function Signup(){
                   ${confirmPasswordError ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'}`}
               />
             </div>
-            
+
+            {serverError && (
+              <p className="text-red-500 text-sm text-center">
+                {serverError}
+              </p>
+            )}
+
+            {serverSuccess && (
+              <p className="text-green-500 text-sm text-center">
+                {serverSuccess}
+              </p>
+            )}
+
             <button 
               type="submit" 
-              className='bg-blue-500 text-white rounded-lg p-3 w-full hover:bg-blue-600 transition hover:cursor-pointer font-medium'
-            >
-              Sign Up
+              disabled={isLoading}
+              className={`text-white rounded-lg p-3 w-full font-medium transition
+                ${isLoading ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}
+              >
+                {isLoading ? "Signing up..." : "Sign Up"}
             </button>
             
             <p className='text-gray-500 text-center text-sm pt-2'>

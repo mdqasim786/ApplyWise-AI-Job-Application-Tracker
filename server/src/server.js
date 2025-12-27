@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes.js";
@@ -7,23 +8,27 @@ dotenv.config();
 
 const app = express();
 
-/* 🔥 THIS IS NON-NEGOTIABLE */
+// Body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-/* ROUTES */
+// ✅ CORS — MUST be before routes
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
+
+// Routes
 app.use("/api/auth", authRoutes);
 
-const PORT = process.env.PORT || 5000;
+// Test route
+app.get("/", (req, res) => res.send("ApplyWise API running"));
 
-mongoose
-  .connect(process.env.MONGO_URI)
+// Start server only after MongoDB connects
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("MongoDB connected");
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
-  .catch((err) => {
-    console.error("MongoDB connection failed:", err);
-  });
+  .catch(err => console.error("MongoDB connection failed:", err));
