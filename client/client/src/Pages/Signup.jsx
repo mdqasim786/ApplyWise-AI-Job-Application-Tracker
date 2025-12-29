@@ -181,8 +181,8 @@ function Signup(){
             </button>
             
             <p className='text-gray-500 text-center text-sm pt-2'>
-              Already have an account? 
-              <a href="/login" className='text-blue-500 hover:underline'> Log in</a>
+              Already have an account?  
+              <a href="/signin" className='text-blue-500 hover:underline'> Sign in</a>
             </p>
           </form>
           </div>
