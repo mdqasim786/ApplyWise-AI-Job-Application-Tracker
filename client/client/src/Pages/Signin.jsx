@@ -1,4 +1,4 @@
-import logo from '../assets/logo.png';
+
 
 function Signin(){
   return (
@@ -7,7 +7,6 @@ function Signin(){
       <div className="flex flex-col md:flex-row h-screen overflow-hidden">
         <div className="w-full md:w-1/2 bg-white flex flex-col justify-center p-6 sm:p-8 md:p-10 lg:p-12">
           <div className="max-w-md w-full mx-auto">
-            {/* <img src={logo} className="h-12 md:h-14 mb-6 object-contain" alt="ApplyWise Logo" style={{ maxWidth:  '100%' }} /> */}
             <h3 className='font-semibold text-xl md:text-2xl text-blue-500 text-center mb-5'>Login Account</h3>
             <p className='mt-2 text-sm text-gray-500 text-center'>ApplyWise is a secure, AI-powered job application tracking   platform built for modern job seekers.
               It helps users organize applications, track statuses, and gain insights to improve hiring outcomes.   ApplyWise combines clean UX, analytics, and scalable MERN   architecture.</p>
@@ -49,9 +48,29 @@ function Signin(){
         </div> 
       
       {/* Right Side Design */}
-      <div className="hidden md:flex w-full md:w-1/2 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 flex-col items-start justify-center p-8 lg:p-12 xl:p-16 relative overflow-hidden">
+      <div className="hidden md:flex w-full md:w-1/2 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 items-center justify-center p-8 lg:p-12 xl:p-16 relative overflow-hidden">
+          
+          <div className="absolute top-10 right-10 w-24 h-24 lg:w-26 lg:h-26 bg-white opacity-10 rounded-full"></div>
+          <div className="absolute bottom-0 left-10 w-90 h-90 border-4 border-white opacity-8 rounded-full translate-y-48 -translate-x-48"></div>
+          
+          <div className="absolute top-20 left-1/2 w-20 h-20 lg:w-4 lg:h-4 bg-white opacity-10 rounded-full"></div>
+          <div className="absolute top-1/2 left-10 w-16 h-16 lg:w-4 lg:h-4 bg-white opacity-10 rounded-full"></div>
+          <div className="absolute bottom-10 right-32 w-20 h-20 lg:w-20 lg:h-20 bg-white opacity-10 rounded-full"></div>
+          <div className="absolute bottom-1/4 left-1/2 w-12 h-12 lg:w-4 lg:h-4 bg-white opacity-10 rounded-full"></div>
+          <div className="absolute bottom-1/2 left-180 w-90 h-90 border-4 border-white opacity-8 rounded-full translate-y-48 -translate-x-48"></div>
+          <div className="absolute top-1/4 right-1/2 left-1/8 w-12 h-12 lg:w-12 lg:h-12 bg-white opacity-10 rounded-full"></div>
+          <div className="absolute bottom-20 left-20 w-16 h-16 lg:w-4 lg:h-4 bg-white opacity-10 rounded-full"></div>
+          
+          
 
-      </div>
+          <div className="z-10 text-center">
+            <h1 className="text-white text-4xl lg:text-5xl xl:text-5xl leading-tight font-mono">
+              <span className="text-blue-200 italic xl:text-2xl">Nice to see you again</span><br />
+              WELCOME BACK<br />
+            </h1>
+            <hr className="text-white w-12 ml-33 border-t-4 border-white rounded"></hr>
+          </div>
+        </div>
       </div>
     </>
   )
