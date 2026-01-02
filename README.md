@@ -1,67 +1,119 @@
-# ApplyWise 🚀
+ApplyWise 🚀
 
-ApplyWise is a **MERN stack job application tracking platform** designed to help users manage, organize, and track their job applications efficiently — with a strong focus on **security, simplicity, and scalability**.
+ApplyWise is a security-first MERN stack job application tracking platform built to help job seekers organize, track, and analyze their job applications through a clean, scalable, and real-world architecture.
 
-## 🌟 Project Vision
-Job searching can quickly become overwhelming. ApplyWise aims to simplify the process by providing a centralized dashboard where users can track applications, deadlines, and progress — all in one place.
+The project is designed to reflect production-level workflows, not just UI demos.
 
-Security and user data protection are treated as **core foundations**, not afterthoughts.
+🌟 Project Vision
 
----
+Job hunting often becomes messy and unorganized. ApplyWise solves this by providing a centralized system where users can securely manage job applications, track statuses, and gain insights — all from one platform.
 
-## 🧩 Current Features (Implemented)
-- ✅ Modern landing page UI
-- ✅ Feature overview pages
-- ✅ Dedicated security & privacy section
-- ✅ Responsive design (mobile-first)
-- ✅ React Router based navigation
-- ✅ Professional signup page UI
-- ✅ Frontend form validation structure
-- ✅ Clean and scalable frontend architecture
+Security, validation, and scalability are treated as core foundations, not add-ons.
 
----
+🧩 Current Features (Implemented)
+Frontend
 
-## 🛠️ Tech Stack
-**Frontend**
-- React.js
-- Tailwind CSS
-- React Router
+✅ Responsive landing & feature pages
 
-**Backend (In Progress)**
-- Node.js
-- Express.js
-- MongoDB (planned)
-- JWT Authentication (planned)
+✅ Security & privacy-focused UI sections
 
----
+✅ React Router based navigation
 
-## 🔐 Security-First Approach
-ApplyWise is being built with:
-- Secure authentication flow
-- Proper input validation
-- Protected routes
-- Scalable backend architecture
+✅ Professional signup & login UI
 
-Security is considered from day one, not added later.
+✅ Form state handling & validation structure
 
----
+✅ Clean component-based architecture
 
-## 📌 Project Status
-🚧 **In Active Development**
+Backend
 
-Backend authentication and database integration are currently in progress.
+✅ Node.js & Express REST API
 
----
+✅ User signup & login system
 
-## 🔮 Upcoming Features
-- User authentication (signup & login)
-- Secure backend API
-- Job application CRUD system
-- Dashboard & analytics
-- Smart reminders & tracking
-- AI-powered insights (future roadmap)
+✅ Password hashing with Bcrypt
 
----
+✅ JWT-based authentication
+
+✅ MongoDB user persistence
+
+✅ Backend input validation
+
+✅ Auth middleware for protected routes
+
+🛠️ Tech Stack
+
+Frontend
+
+React.js
+
+Tailwind CSS
+
+React Router
+
+Backend
+
+Node.js
+
+Express.js
+
+MongoDB & Mongoose
+
+JWT Authentication
+
+Bcrypt
+
+Tools
+
+Git & GitHub
+
+Postman
+
+🔐 Security-First Approach
+
+ApplyWise is built with modern security practices:
+
+Token-based authentication (JWT)
+
+Secure password hashing
+
+Protected backend routes
+
+Strict input validation
+
+Clear separation of client & server logic
+
+Security is implemented from the very beginning, not patched later.
+
+📌 Project Status
+
+🚧 Active Development
+
+Core authentication and backend infrastructure are complete.
+Job tracking, dashboards, and analytics are currently in progress.
+
+🔮 Upcoming Features
+
+Job application CRUD system
+
+Application status tracking (Applied, Interview, Rejected)
+
+Analytics dashboard
+
+Secure user-specific data isolation
+
+AI-powered resume & cover letter insights
+
+Smart reminders & follow-ups
+
+🤝 Contribution
+
+This project is currently under solo development.
+Suggestions and feedback are welcome.
+
+📄 License
+
+MIT License
 
 ## 🤝 Contribution
 This project is currently under solo development. Contributions and suggestions may be welcomed in the future.
