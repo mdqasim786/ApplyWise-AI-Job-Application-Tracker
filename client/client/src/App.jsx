@@ -5,6 +5,7 @@ import { Works } from './Pages/Works.jsx'
 import { Security } from './Pages/Security.jsx'
 import { Signup } from './Pages/Signup.jsx'
 import { Signin } from './Pages/Signin.jsx'
+import { Dashboard } from './Pages/Dashboard.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 
@@ -21,6 +22,7 @@ function App() {
             <Route path='/security' element={<Security />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/signin' element={<Signin />} />
+            <Route path='/dashboard' element={<Dashboard />} />
           </Routes>
         </Router>
       </div>

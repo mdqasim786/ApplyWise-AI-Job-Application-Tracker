@@ -1,10 +1,18 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signin(){
+  const navigate = useNavigate();
+  // frontend states
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
+
+    // Backend States
+    const [serverError, setServerError] = useState('');
+    const [serverSuccess, setServerSuccess] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +29,48 @@ function Signin(){
     setEmailError(errors.email || '');
     setPasswordError(errors.password || '');
     if (Object.keys(errors).length > 0) return;
+    setServerError('');
+    setServerSuccess('');
+    setIsLoading(true);
+
+    try {
+    const response = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+
+    const data =  await response.json();
+    if (!response.ok) {
+      setServerError(data.message || "Login failed");
+      setIsLoading(false);
+      return;
+    }
+    if (response.ok){
+      console.log("Token received:", data.token);
+      localStorage.setItem("token", data.token);
+      setServerSuccess("Login successful!");
+      setEmail('');
+      setPassword('');
+      setEmailError('');
+      setPasswordError('');
+      setIsLoading(false);
+
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 1000);
+    }
+  } catch (error) {
+    setServerError("Network error. Please try again.");
+      setIsLoading(false);
   }
+}
+
   return (
     <>
       {/* Left Side Design */}
@@ -83,11 +132,23 @@ function Signin(){
                 />
               </div>
 
+              {serverError && (
+              <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+              {serverError}
+              </div>
+              )}
+
+              {serverSuccess && (
+              <div className="mt-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg text-sm">
+              {serverSuccess}
+              </div>
+              )}
+
               <button 
                 type="submit" 
                 className="text-white rounded-lg p-3 w-full font-medium transition bg-blue-500 hover:bg-blue-600 hover:cursor-pointer mt-5"
               >
-                Sign In
+                Sign In 
               </button>
 
               <p className='text-gray-500 text-center text-sm pt-2'>

@@ -92,7 +92,11 @@
       // 5️⃣ Send response
       return res.status(200).json({
         message: "Login successful",
-        token,
+        token: token,
+        user: {
+          id: user._id,
+          email: user.email,
+        }
       });
 
     } catch (error) {

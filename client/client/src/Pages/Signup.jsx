@@ -67,7 +67,7 @@ function Signup(){
     }
 
     if (response.ok){
-      setServerSuccess("Signup successful! You can now log in.");
+      setServerSuccess("Signup successful! You can now sign in.");
       setEmail('');
       setPassword('');
       setConfirmPassword('');
