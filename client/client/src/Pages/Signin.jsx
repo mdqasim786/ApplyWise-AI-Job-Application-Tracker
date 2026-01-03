@@ -1,4 +1,27 @@
+import { useState } from "react";
+
 function Signin(){
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const errors = {};
+    if (!email){
+      errors.email = 'Email is required';
+    } 
+
+    if (!password) {
+      errors.password = 'Password is required';
+    }
+
+    setEmailError(errors.email || '');
+    setPasswordError(errors.password || '');
+    if (Object.keys(errors).length > 0) return;
+  }
   return (
     <>
       {/* Left Side Design */}
@@ -11,26 +34,51 @@ function Signin(){
             <hr className='mt-4 mb-5 text-gray-300'></hr>
 
             <form 
+              onSubmit={handleSubmit}
             className='flex flex-col space-y-3.5'
             >
               <div>
-                <label className='font-medium text-sm block mb-1.5'>Email Address</label>
+                <label className='font-medium text-sm block mb-1.5'>
+                  Email Address
+                  {emailError && (
+                  <span className="text-red-500 text-xs ml-2">
+                    {emailError}
+                  </span>
+                  )}
+                </label>
                 <input 
                   type="email" 
                   placeholder='Enter your email' 
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setEmailError('');
+                  }}
                   className="border rounded-lg p-2.5 w-full text-sm focus:outline-none focus:ring-2 border-gray-300 focus:ring-blue-500 border-l-4 sm:border-l-6 border-l-blue-500"
                 />
               </div>            
               <div>
                 <div className='flex justify-between items-center mb-1.5'>
-                  <label className='font-medium text-sm'>Password</label>
+                  <label className='font-medium text-sm'>
+                    Password
+                    {passwordError && (
+                    <span className="text-red-500 text-xs ml-2">
+                      {passwordError}
+                    </span>
+                    )}
+                  </label>
                   <a href="/signin" className='text-blue-500 hover:underline text-xs sm:text-sm'>
                     Forgot Password?
                   </a>
                 </div>
                 <input 
                   type="password" 
-                  placeholder='Create a password' 
+                  placeholder='Enter your password' 
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setPasswordError('');
+                  }}
                   className="border rounded-lg p-2.5 w-full text-sm focus:outline-none focus:ring-2 border-gray-300 focus:ring-blue-500 border-l-4 sm:border-l-6 border-l-blue-500"
                 />
               </div>
@@ -41,6 +89,11 @@ function Signin(){
               >
                 Sign In
               </button>
+
+              <p className='text-gray-500 text-center text-sm pt-2'>
+              Don't have an account? 
+              <a href="/signup" className='text-blue-500 hover:underline'> Sign up</a>
+              </p>
             </form>
 
             {/* Mobile Only Section - fills white space */}

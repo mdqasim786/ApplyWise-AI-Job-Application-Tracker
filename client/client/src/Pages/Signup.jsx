@@ -174,7 +174,7 @@ function Signup(){
             <button 
               type="submit" 
               disabled={isLoading}
-              className={`text-white rounded-lg p-3 w-full font-medium transition
+              className={`text-white rounded-lg p-3 w-full font-medium transition hover:cursor-pointer
                 ${isLoading ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}
               >
                 {isLoading ? "Signing up..." : "Sign Up"}
