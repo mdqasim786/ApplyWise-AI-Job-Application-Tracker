@@ -9,12 +9,14 @@ import { Dashboard } from './Pages/Dashboard.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 import ProtectedRoute from './components/protectedroute.jsx'
+import { AuthProvider } from './contexts/AuthContext.jsx'
 
 function App() {
   return (
     <>
       <div>
         <Router>
+          <AuthProvider>
           <Routes>
             <Route path='/' element={<LandingPage />} />
             <Route path='/contact' element={<Contact />} />
@@ -32,6 +34,7 @@ function App() {
               }
             />
             </Routes>
+            </AuthProvider>
         </Router>
       </div>
     </>

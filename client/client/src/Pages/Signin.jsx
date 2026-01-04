@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../contexts/AuthContext';
 
 function Signin(){
   const navigate = useNavigate();
+  const { login } = useAuth();  // ✅ Get login from context
+  
   // frontend states
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-    // Backend States
-    const [serverError, setServerError] = useState('');
-    const [serverSuccess, setServerSuccess] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+  // Backend States
+  const [serverError, setServerError] = useState('');
+  const [serverSuccess, setServerSuccess] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,47 +32,51 @@ function Signin(){
     setEmailError(errors.email || '');
     setPasswordError(errors.password || '');
     if (Object.keys(errors).length > 0) return;
+    
     setServerError('');
     setServerSuccess('');
     setIsLoading(true);
 
     try {
-    const response = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
 
-    const data =  await response.json();
-    if (!response.ok) {
-      setServerError(data.message || "Login failed");
+      const data = await response.json();
+      
+      if (!response.ok) {
+        setServerError(data.message || "Login failed");
+        setIsLoading(false);
+        return;
+      }
+      
+      if (response.ok){
+        // ✅ USE CONTEXT LOGIN
+        login(data.token);
+        
+        setServerSuccess("Login successful! Redirecting...");
+        setEmail('');
+        setPassword('');
+        setEmailError('');
+        setPasswordError('');
+        setIsLoading(false);
+        
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 1000);
+      }
+    } catch (error) {
+      setServerError("Network error. Please try again.");
       setIsLoading(false);
-      return;
     }
-    if (response.ok){
-      console.log("Token received:", data.token);
-      localStorage.setItem("token", data.token);
-      setServerSuccess("Login successful!");
-      setEmail('');
-      setPassword('');
-      setEmailError('');
-      setPasswordError('');
-      setIsLoading(false);
-
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 1000);
-    }
-  } catch (error) {
-    setServerError("Network error. Please try again.");
-      setIsLoading(false);
   }
-}
 
   return (
     <>
@@ -84,15 +91,15 @@ function Signin(){
 
             <form 
               onSubmit={handleSubmit}
-            className='flex flex-col space-y-3.5'
+              className='flex flex-col space-y-3.5'
             >
               <div>
                 <label className='font-medium text-sm block mb-1.5'>
                   Email Address
                   {emailError && (
-                  <span className="text-red-500 text-xs ml-2">
-                    {emailError}
-                  </span>
+                    <span className="text-red-500 text-xs ml-2">
+                      {emailError}
+                    </span>
                   )}
                 </label>
                 <input 
@@ -111,9 +118,9 @@ function Signin(){
                   <label className='font-medium text-sm'>
                     Password
                     {passwordError && (
-                    <span className="text-red-500 text-xs ml-2">
-                      {passwordError}
-                    </span>
+                      <span className="text-red-500 text-xs ml-2">
+                        {passwordError}
+                      </span>
                     )}
                   </label>
                   <a href="/signin" className='text-blue-500 hover:underline text-xs sm:text-sm'>
@@ -133,15 +140,15 @@ function Signin(){
               </div>
 
               {serverError && (
-              <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
-              {serverError}
-              </div>
+                <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+                  {serverError}
+                </div>
               )}
 
               {serverSuccess && (
-              <div className="mt-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg text-sm">
-              {serverSuccess}
-              </div>
+                <div className="mt-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg text-sm">
+                  {serverSuccess}
+                </div>
               )}
 
               <button 
@@ -152,8 +159,8 @@ function Signin(){
               </button>
 
               <p className='text-gray-500 text-center text-sm pt-2'>
-              Don't have an account? 
-              <a href="/signup" className='text-blue-500 hover:underline'> Sign up</a>
+                Don't have an account? 
+                <a href="/signup" className='text-blue-500 hover:underline'> Sign up</a>
               </p>
             </form>
 
@@ -201,9 +208,8 @@ function Signin(){
           </div>
         </div> 
       
-      {/* Right Side Design */}
-      <div className="hidden md:flex w-full md:w-1/2 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 items-center justify-center p-8 lg:p-12 xl:p-16 relative overflow-hidden">
-
+        {/* Right Side Design */}
+        <div className="hidden md:flex w-full md:w-1/2 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 items-center justify-center p-8 lg:p-12 xl:p-16 relative overflow-hidden">
           {/* Bubbles view  */}
           <div className="absolute top-10 right-10 w-32 h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-white to-transparent opacity-20 rounded-full blur-sm animate-pulse"></div>
           <div className="absolute bottom-0 left-10 w-96 h-96 border-4 border-white opacity-15 rounded-full translate-y-48 -translate-x-48 animate-spin" style={{animationDuration: '20s'}}></div>
