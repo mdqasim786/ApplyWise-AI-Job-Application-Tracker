@@ -8,6 +8,7 @@ import { Signin } from './Pages/Signin.jsx'
 import { Dashboard } from './Pages/Dashboard.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
+import ProtectedRoute from './components/protectedroute.jsx'
 
 function App() {
   return (
@@ -22,8 +23,15 @@ function App() {
             <Route path='/security' element={<Security />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/signin' element={<Signin />} />
-            <Route path='/dashboard' element={<Dashboard />} />
-          </Routes>
+            <Route 
+              path='/dashboard' 
+              element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+              }
+            />
+            </Routes>
         </Router>
       </div>
     </>
