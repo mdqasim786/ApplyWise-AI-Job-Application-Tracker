@@ -1,48 +1,41 @@
-ApplyWise 🚀
-
-ApplyWise is a security-first MERN stack job application tracking platform built to help job seekers organize, track, and analyze their job applications through a clean, scalable, and real-world architecture.
-
-The project is designed to reflect production-level workflows, not just UI demos.
-
 🌟 Project Vision
 
-Job hunting often becomes messy and unorganized. ApplyWise solves this by providing a centralized system where users can securely manage job applications, track statuses, and gain insights — all from one platform.
+Job hunting often becomes messy and unorganized. ApplyWise solves this by providing a centralized and secure system where users can manage job applications, track progress, and gain insights — all from a single platform.
 
 Security, validation, and scalability are treated as core foundations, not add-ons.
 
-🧩 Current Features (Implemented)
-Frontend
+🧩 Current Features
+✅ Frontend
 
-✅ Responsive landing & feature pages
+Responsive landing & feature pages
 
-✅ Security & privacy-focused UI sections
+Security & privacy-focused UI sections
 
-✅ React Router based navigation
+React Router based navigation
 
-✅ Professional signup & login UI
+Professional signup & login interfaces
 
-✅ Form state handling & validation structure
+Frontend form state handling & validation
 
-✅ Clean component-based architecture
+Clean, component-based architecture
 
-Backend
+✅ Backend
 
-✅ Node.js & Express REST API
+Node.js & Express REST API
 
-✅ User signup & login system
+User signup & login system
 
-✅ Password hashing with Bcrypt
+Password hashing using Bcrypt
 
-✅ JWT-based authentication
+JWT-based authentication
 
-✅ MongoDB user persistence
+MongoDB user persistence with Mongoose
 
-✅ Backend input validation
+Backend input validation
 
-✅ Auth middleware for protected routes
+Auth middleware for protected routes
 
 🛠️ Tech Stack
-
 Frontend
 
 React.js
@@ -71,7 +64,7 @@ Postman
 
 🔐 Security-First Approach
 
-ApplyWise is built with modern security practices:
+ApplyWise follows modern security best practices:
 
 Token-based authentication (JWT)
 
@@ -79,46 +72,51 @@ Secure password hashing
 
 Protected backend routes
 
-Strict input validation
+Strict frontend & backend input validation
 
-Clear separation of client & server logic
+Clear separation of client and server logic
 
-Security is implemented from the very beginning, not patched later.
+Security is implemented from day one, not patched later.
 
 📌 Project Status
 
 🚧 Active Development
 
 Core authentication and backend infrastructure are complete.
-Job tracking, dashboards, and analytics are currently in progress.
+The dashboard, job tracking system, and analytics are currently in progress.
 
 🔮 Upcoming Features
 
 Job application CRUD system
 
-Application status tracking (Applied, Interview, Rejected)
+Application status tracking (Applied, Interview, Rejected, Offer)
 
-Analytics dashboard
+User dashboard with analytics
 
 Secure user-specific data isolation
 
-AI-powered resume & cover letter insights
-
 Smart reminders & follow-ups
 
-🤝 Contribution
+AI-powered resume & cover letter insights (future roadmap)
 
-This project is currently under solo development.
-Suggestions and feedback are welcome.
+🤝 Contributing
+
+ApplyWise is currently under solo development, but contributions are welcome in specific areas.
+
+You can contribute by:
+
+Improving UI/UX consistency
+
+Refactoring frontend components
+
+Enhancing backend validation
+
+Writing tests (future phase)
+
+Reporting bugs or suggesting features
+
+If you'd like to contribute, feel free to open an Issue or submit a Pull Request with a clear description.
 
 📄 License
 
-MIT License
-
-## 🤝 Contribution
-This project is currently under solo development. Contributions and suggestions may be welcomed in the future.
-
----
-
-## 📄 License
 MIT License
