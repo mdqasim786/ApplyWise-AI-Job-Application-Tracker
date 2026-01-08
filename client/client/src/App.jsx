@@ -6,6 +6,7 @@ import { Security } from './Pages/Security.jsx'
 import { Signup } from './Pages/Signup.jsx'
 import { Signin } from './Pages/Signin.jsx'
 import { Dashboard } from './Pages/Dashboard.jsx'
+import { Help } from './Pages/Help.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 import ProtectedRoute from './components/protectedroute.jsx'
@@ -25,6 +26,7 @@ function App() {
             <Route path='/security' element={<Security />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/signin' element={<Signin />} />
+            <Route path='/dashboard/help' element={<Help />} />
             <Route 
               path='/dashboard' 
               element={
