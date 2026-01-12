@@ -4,17 +4,21 @@ import User from "../models/user.model.js";
 export const authMiddleware = async (req, res, next) => {
   try {
     // Extract token
+    console.log("AUTH HEADERS:", req.headers.authorization);
     const authHeader = req.headers.authorization;
+    
     
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({ message: "Not authorized, no token" });
     }
     
     const token = authHeader.split(" ")[1];
+    console.log("TOKEN:", token);
     
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
+    console.log("DECODED:", decoded);
+
     // Fetch full user data
     const user = await User.findById(decoded.userId).select('-password');
     
