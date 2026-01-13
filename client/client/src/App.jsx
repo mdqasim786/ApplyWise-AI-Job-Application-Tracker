@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 import ProtectedRoute from './components/protectedroute.jsx'
 import { AuthProvider } from './contexts/AuthContext.jsx'
+import { Settings } from './Pages/Settings.jsx'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path='/signin' element={<Signin />} />
             <Route path='/dashboard/help' element={<Help />} />
             <Route path='/dashboard/profile' element={<Profile />} />
+            <Route path='/dashboard/settings' element={<Settings />} />
             <Route 
               path='/dashboard' 
               element={
