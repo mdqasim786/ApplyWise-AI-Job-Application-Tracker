@@ -5,11 +5,6 @@ import DeleteModal from '../components/deletemodal';
 function Settings(){
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleDelete = () => {
-    console.log("Data deleted from database");
-    setIsModalOpen(false);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-500 via-blue-400 to-blue-200 p-8">
       <h1 className="text-3xl ml-50 font-bold text-white">Settings
@@ -69,7 +64,6 @@ function Settings(){
                 <DeleteModal 
                 isOpen={isModalOpen} 
                 onClose={() => setIsModalOpen(false)} 
-                onConfirm={handleDelete}
                 />
             </div>
         </div>
