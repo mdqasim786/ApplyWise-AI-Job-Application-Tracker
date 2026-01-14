@@ -1,4 +1,4 @@
-import { Download } from 'lucide-react';
+import { Download, Trash2} from 'lucide-react';
 
 function Settings(){
   return (
@@ -40,10 +40,17 @@ function Settings(){
                 className="w-full mt-2 p-2 mb-4 border rounded-xl bg-gray-200 text-gray-600"
             />
 
-            <div className="flex">
+            <div className="flex mb-5">
               <label className="text-md font-bold text-black">Download my ApplyWise Profile</label>
-              <button className="ml-auto bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+              <button className="ml-auto bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 hover:cursor-pointer">
                 <Download size={16} />
+              </button>
+            </div>
+
+            <div className="flex">
+              <label className="text-md font-bold text-black">Delete my ApplyWise Profile</label>
+              <button className="ml-auto bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 hover:cursor-pointer">
+                <Trash2 size={16} />
               </button>
             </div>
         </div>
