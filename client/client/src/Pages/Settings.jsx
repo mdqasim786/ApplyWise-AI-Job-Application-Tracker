@@ -1,10 +1,20 @@
 import { Download, Trash2} from 'lucide-react';
+import React, { useState } from 'react';
+import DeleteModal from '../components/deletemodal';
 
 function Settings(){
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleDelete = () => {
+    console.log("Data deleted from database");
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-500 via-blue-400 to-blue-200 p-8">
       <h1 className="text-3xl ml-50 font-bold text-white">Settings
       </h1>
+        {/* User Information Container  */}
         <div className="mt-6 ml-50 align-center w-3xl p-6 bg-white rounded-lg shadow-md">
           <label className="text-md text-black">Email Address</label>
             <input
@@ -47,16 +57,24 @@ function Settings(){
                 <Download size={16} />
               </button>
             </div>
-
+  
             <div className="flex">
               <label className="text-md font-bold text-black">Delete my ApplyWise Profile</label>
-              <button className="ml-auto bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 hover:cursor-pointer">
-                <Trash2 size={16} />
-              </button>
+                <button 
+                  onClick={() => setIsModalOpen(true)}
+                  className="ml-auto bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 hover:cursor-pointer">
+                  <Trash2 size={16} />
+                </button>
+                
+                <DeleteModal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+                onConfirm={handleDelete}
+                />
             </div>
         </div>
 
-
+        {/* About Applywise Container  */}
         <div className="mt-6 ml-50 w-3xl p-6 bg-white rounded-lg shadow-md">
           <h2 className="text-xl font-bold text-gray-800 mb-4">About ApplyWise
           </h2>
