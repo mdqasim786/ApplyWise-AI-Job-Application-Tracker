@@ -130,7 +130,6 @@ function Settings(){
                 placeholder="Add another email"
                 value={alternateEmail}
                 onChange={(e) => setAlternateEmail(e.target.value)}
-                onBlur={handleSaveSettings} 
                 className="w-full mt-2 p-2 mb-4 border rounded-xl bg-gray-200 text-gray-600"
             />
 
@@ -140,7 +139,6 @@ function Settings(){
                 placeholder="Enter Phone Number"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                onBlur={handleSaveSettings}
                 className="w-full mt-2 p-2 mb-4 border rounded-xl bg-gray-200 text-gray-600"
             />
 
