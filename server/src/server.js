@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes.js";
 import profileRoutes from './routes/profile.route.js';
+import settingsRoutes from './routes/settings.route.js';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRoutes);
 app.use('/api/profile', profileRoutes);
+app.use('/api/settings', settingsRoutes);
 
 app.get("/", (req, res) => res.send("ApplyWise API running"));
 

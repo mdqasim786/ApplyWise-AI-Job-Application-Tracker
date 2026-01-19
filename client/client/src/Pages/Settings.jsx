@@ -1,9 +1,62 @@
 import { Download, Trash2} from 'lucide-react';
 import React, { useState } from 'react';
 import DeleteModal from '../components/deletemodal';
+import { useEffect } from 'react';
 
 function Settings(){
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [alternateEmail, setAlternateEmail] = useState('');
+
+  const fetchUserProfile = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await fetch("http://localhost:5000/api/settings", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setEmail(data.email);
+        setAlternateEmail(data.alternateEmail || '');
+      }
+    } catch (error) {
+      setErrorMessage("Failed to load settings");
+    }
+  };
+
+  useEffect(() => {
+    fetchUserProfile();
+  }, []);
+
+  const handleSaveSettings = async () => {
+    const token = localStorage.getItem("token");
+    
+    try {
+      const response = await fetch("http://localhost:5000/api/settings", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ 
+          alternateEmail,
+        }),
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        alert("Settings saved successfully!");
+      } else {
+        setErrorMessage(data.message);
+      }
+    } catch (error) {
+      setErrorMessage("Failed to save settings");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-500 via-blue-400 to-blue-200 p-8">
@@ -13,6 +66,7 @@ function Settings(){
         <div className="mt-6 ml-50 align-center w-3xl p-6 bg-white rounded-lg shadow-md">
           <label className="text-md text-black">Email Address</label>
             <input
+              value={email}
               disabled
               className="w-full mt-2 p-2 mb-4 border rounded-xl bg-gray-200 text-gray-600 cursor-not-allowed"
             />
@@ -21,6 +75,9 @@ function Settings(){
               <input
                 type="email"
                 placeholder="Add another email"
+                value={alternateEmail}
+                onChange={(e) => setAlternateEmail(e.target.value)}
+                onBlur={handleSaveSettings} 
                 className="w-full mt-2 p-2 mb-4 border rounded-xl bg-gray-200 text-gray-600"
             />
 
@@ -66,6 +123,12 @@ function Settings(){
                 onClose={() => setIsModalOpen(false)} 
                 />
             </div>
+
+            <button 
+                  onClick={handleSaveSettings}
+                  className=" bg-blue-600 text-white mt-4 px-4 py-2 rounded-lg hover:bg-blue-700 hover:cursor-pointer">
+                  Save Settings
+            </button>
         </div>
 
         {/* About Applywise Container  */}
