@@ -4,7 +4,7 @@ import { getSettings, updateSettings } from '../controllers/settings.controller.
 
 const router = express.Router();
 
-router.get('/settings', authMiddleware, getSettings);
-router.put('/settings', authMiddleware, updateSettings);
+router.get('/', authMiddleware, getSettings);
+router.put('/api/settings', authMiddleware, updateSettings);
 
 export default router;
