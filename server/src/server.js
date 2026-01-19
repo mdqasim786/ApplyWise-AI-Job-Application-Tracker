@@ -22,6 +22,8 @@ app.use("/api/auth", authRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/settings', settingsRoutes);
 
+app.use('/uploads', express.static('uploads'));
+
 app.get("/", (req, res) => res.send("ApplyWise API running"));
 
 mongoose.connect(process.env.MONGO_URI)

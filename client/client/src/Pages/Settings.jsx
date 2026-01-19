@@ -2,6 +2,8 @@ import { Download, Trash2} from 'lucide-react';
 import React, { useState } from 'react';
 import DeleteModal from '../components/deletemodal';
 import { useEffect } from 'react';
+import { FileText, Upload, X } from 'lucide-react';
+
 
 function Settings(){
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -9,26 +11,74 @@ function Settings(){
   const [errorMessage, setErrorMessage] = useState('');
   const [alternateEmail, setAlternateEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [resumeFile, setResumeFile] = useState(null);
+  const [resumeFileName, setResumeFileName] = useState('');
+
+  const handleResumeUpload = async (e) => {
+    const file = e.target.files[0];
+    
+    if (!file) return;
+    
+    // Validate file type
+    const allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    if (!allowedTypes.includes(file.type)) {
+      alert('Only PDF and DOCX files allowed');
+      return;
+    }
+  
+    const token = localStorage.getItem("token");
+    const formData = new FormData();
+    formData.append('resume', file);
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/settings/resume", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        setResumeFileName(data.resumeFileName);
+        alert("Resume uploaded successfully!");
+      }
+    } catch (error) {
+      alert("Upload failed");
+    }
+  };
 
   const fetchUserProfile = async () => {
     const token = localStorage.getItem("token");
-
+  
+    if (!token) {
+      setErrorMessage("Not authenticated");
+      return;
+    }
+  
     try {
       const response = await fetch("http://localhost:5000/api/settings", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+  
       const data = await response.json();
+  
       if (response.ok) {
-        setEmail(data.email);
-        setAlternateEmail(data.alternateEmail || '');
-        setPhoneNumber(data.mobileNumber || '');
+        setEmail(data.email); // 👈 THIS WILL NOW WORK
+        setAlternateEmail(data.alternateEmail || "");
+        setPhoneNumber(data.mobileNumber || "");
+        setResumeFileName(data.resumeFileName || "");
+      } else {
+        setErrorMessage(data.message);
       }
     } catch (error) {
       setErrorMessage("Failed to load settings");
     }
   };
+  
 
   useEffect(() => {
     fetchUserProfile();
@@ -46,6 +96,7 @@ function Settings(){
         },
         body: JSON.stringify({ 
           alternateEmail,
+          mobileNumber: phoneNumber,
         }),
       });
   
@@ -68,7 +119,7 @@ function Settings(){
         <div className="mt-6 ml-50 align-center w-3xl p-6 bg-white rounded-lg shadow-md">
           <label className="text-md text-black">Email Address</label>
             <input
-              value={email}
+              value={email || ""}
               disabled
               className="w-full mt-2 p-2 mb-4 border rounded-xl bg-gray-200 text-gray-600 cursor-not-allowed"
             />
@@ -93,11 +144,35 @@ function Settings(){
                 className="w-full mt-2 p-2 mb-4 border rounded-xl bg-gray-200 text-gray-600"
             />
 
-            <label className="text-md text-black">Add your Resume/CV</label>
-              <input
-                type="file"
-                className="w-full mt-2 p-2 mb-4 border rounded-xl bg-gray-200 text-gray-600"
-            />
+<label className="text-md text-black">Add your Resume/CV</label>
+
+{resumeFileName ? (
+  // Show uploaded file
+  <div className="flex items-center justify-between w-full mt-2 p-3 border rounded-xl bg-blue-50">
+    <div className="flex items-center gap-2">
+      <FileText className="text-blue-600" size={20} />
+      <span className="text-gray-700">{resumeFileName}</span>
+    </div>
+    <button
+      onClick={() => setResumeFileName('')}
+      className="text-red-500 hover:text-red-700"
+    >
+      <X size={20} />
+    </button>
+  </div>
+) : (
+  // Upload button
+  <label className="flex items-center justify-center gap-2 w-full mt-2 p-3 border-2 border-dashed border-gray-300 rounded-xl bg-gray-50 hover:bg-gray-100 cursor-pointer">
+    <Upload className="text-gray-600" size={20} />
+    <span className="text-gray-600">Click to upload PDF or DOCX</span>
+    <input
+      type="file"
+      accept=".pdf,.docx,.doc"
+      onChange={handleResumeUpload}
+      className="hidden"
+    />
+  </label>
+)}
 
             
             <label className="text-md text-black">Report a bug (Enter details below)</label>

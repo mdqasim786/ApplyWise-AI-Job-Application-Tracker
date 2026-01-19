@@ -23,7 +23,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
-    phoneNumber:{
+    resumeURL:{
+      type: String,
+      default: '',
+    },
+    resumeFilename:{
       type: String,
       default: '',
     },
