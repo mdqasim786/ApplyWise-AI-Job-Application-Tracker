@@ -8,6 +8,7 @@ function Settings(){
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [alternateEmail, setAlternateEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const fetchUserProfile = async () => {
     const token = localStorage.getItem("token");
@@ -22,6 +23,7 @@ function Settings(){
       if (response.ok) {
         setEmail(data.email);
         setAlternateEmail(data.alternateEmail || '');
+        setPhoneNumber(data.mobileNumber || '');
       }
     } catch (error) {
       setErrorMessage("Failed to load settings");
@@ -85,6 +87,9 @@ function Settings(){
               <input
                 type="tel"
                 placeholder="Enter Phone Number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                onBlur={handleSaveSettings}
                 className="w-full mt-2 p-2 mb-4 border rounded-xl bg-gray-200 text-gray-600"
             />
 
