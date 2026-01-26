@@ -116,7 +116,7 @@ export const deleteProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    console.log("✅ User profile deleted:", deletedUser.email);
+    console.log("✅ User profile deleted successfully:", deletedUser.email);
 
     // Optional: Delete associated files (resume) from filesystem
     if (deletedUser.resumeUrl) {
