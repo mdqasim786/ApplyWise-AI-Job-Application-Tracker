@@ -102,3 +102,39 @@ export const deleteResume = async (req, res) => {
     return res.status(500).json({ message: "Delete failed" });
   }
 };
+
+export const deleteProfile = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    
+    console.log("🗑️ Delete profile request for user:", userId);
+
+    // Find and delete the user
+    const deletedUser = await User.findByIdAndDelete(userId);
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    console.log("✅ User profile deleted:", deletedUser.email);
+
+    // Optional: Delete associated files (resume) from filesystem
+    if (deletedUser.resumeUrl) {
+      const fs = await import('fs');
+      const path = await import('path');
+      const filePath = path.join(process.cwd(), 'uploads', 'resumes', path.basename(deletedUser.resumeUrl));
+      
+      fs.unlink(filePath, (err) => {
+        if (err) console.log("File deletion error:", err);
+        else console.log("Resume file deleted");
+      });
+    }
+
+    return res.status(200).json({
+      message: "Profile deleted successfully"
+    });
+  } catch (error) {
+    console.error("❌ Delete profile error:", error);
+    return res.status(500).json({ message: "Failed to delete profile" });
+  }
+};

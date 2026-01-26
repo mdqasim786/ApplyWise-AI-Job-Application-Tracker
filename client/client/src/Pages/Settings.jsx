@@ -1,5 +1,45 @@
-import { Download, Trash2, FileText, Upload, X } from 'lucide-react';
+import { Download, Trash2, FileText, Upload, X, AlertTriangle } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
+
+// Delete Modal Component
+function DeleteModal({ isOpen, onClose, onConfirm, isDeleting }) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="bg-red-100 p-3 rounded-full">
+            <AlertTriangle className="text-red-600" size={24} />
+          </div>
+          <h2 className="text-xl font-bold text-gray-900">Delete Profile</h2>
+        </div>
+        
+        <p className="text-gray-700 mb-6">
+          Are you sure you want to delete your ApplyWise profile? This action cannot be undone. 
+          All your data including email, password, applications, and resume will be permanently deleted.
+        </p>
+
+        <div className="flex gap-3 justify-end">
+          <button
+            onClick={onClose}
+            disabled={isDeleting}
+            className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors disabled:opacity-50"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onConfirm}
+            disabled={isDeleting}
+            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
+          >
+            {isDeleting ? 'Deleting...' : 'Yes, Delete My Profile'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function Settings(){
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -9,6 +49,7 @@ function Settings(){
   const [phoneNumber, setPhoneNumber] = useState('');
   const [resumeFileName, setResumeFileName] = useState('');
   const [isUploading, setIsUploading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleResumeUpload = async (e) => {
     const file = e.target.files[0];
@@ -159,6 +200,42 @@ function Settings(){
     }
   };
 
+  const handleDeleteProfile = async () => {
+    const token = localStorage.getItem("token");
+    
+    setIsDeleting(true);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/settings/profile", {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Clear all local storage
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        
+        alert("Your profile has been deleted successfully!");
+        
+        // Redirect to signin page
+        window.location.href = "/signin"; // or use your router's navigation
+      } else {
+        alert(data.message || "Failed to delete profile");
+      }
+    } catch (error) {
+      console.error("Delete profile error:", error);
+      alert("Failed to delete profile. Please try again.");
+    } finally {
+      setIsDeleting(false);
+      setIsModalOpen(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-500 via-blue-400 to-blue-200 p-8">
       <h1 className="text-3xl ml-50 font-bold text-white">Settings</h1>
@@ -253,6 +330,14 @@ function Settings(){
             <Trash2 size={16} />
           </button>
         </div>
+
+        {/* Delete Modal */}
+        <DeleteModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)}
+          onConfirm={handleDeleteProfile}
+          isDeleting={isDeleting}
+        />
 
         <button 
           onClick={handleSaveSettings}
