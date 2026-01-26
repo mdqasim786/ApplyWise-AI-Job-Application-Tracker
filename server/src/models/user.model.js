@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
-    resumeFilename:{
+    resumeFileName:{
       type: String,
       default: '',
     },
