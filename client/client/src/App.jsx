@@ -13,6 +13,7 @@ import './App.css'
 import ProtectedRoute from './components/protectedroute.jsx'
 import { AuthProvider } from './contexts/AuthContext.jsx'
 import { Settings } from './Pages/Settings.jsx'
+import { JobSearch } from './Pages/JobSearch.jsx'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path='/dashboard/help' element={<Help />} />
             <Route path='/dashboard/profile' element={<Profile />} />
             <Route path='/dashboard/settings' element={<Settings />} />
+            <Route path='/dashboard/jobs' element={<JobSearch />} />
             <Route 
               path='/dashboard' 
               element={

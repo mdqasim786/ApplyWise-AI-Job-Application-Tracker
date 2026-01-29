@@ -1,6 +1,6 @@
 import Job from '../models/job.model.js';
 import Application from '../models/application.model.js';
-import SavedJob from '../models/savedJob.model.js';
+import SaveJob from '../models/saveJob.model.js';
 
 // Get all jobs with filters
 export const getJobs = async (req, res) => {
