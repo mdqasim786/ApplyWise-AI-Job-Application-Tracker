@@ -114,52 +114,49 @@ function JobSearch() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-blue-100 to-blue-200 p-8">
-      {/* Header with Blue Gradient */}
-      <div className="mb-8 text-center">
-        <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-3">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-blue-100 to-blue-200 p-4 md:p-8">
+      {/* Header */}
+      <div className="mb-8 text-center px-2">
+        <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-3">
           Find Your Dream Job
         </h1>
-        <p className="text-blue-700 text-lg">Discover opportunities that match your skills and passion</p>
+        <p className="text-blue-700 text-sm md:text-lg">Discover opportunities that match your skills and passion</p>
       </div>
 
-      {/* Search Filters - Blue Theme */}
-      <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 border-t-4 border-blue-500">
+      {/* Search Filters - Responsive Grid */}
+      <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl p-4 md:p-6 mb-8 border-t-4 border-blue-500">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {/* Search Input */}
           <div className="md:col-span-2">
             <div className="relative">
-              <Search className="absolute left-3 top-3 text-blue-500" size={20} />
+              <Search className="absolute left-3 top-3.5 text-blue-500" size={18} />
               <input
                 type="text"
                 placeholder="Job title or company..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border-2 border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 border-2 border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
           </div>
 
-          {/* Location Input */}
           <div>
             <div className="relative">
-              <MapPin className="absolute left-3 top-3 text-blue-500" size={20} />
+              <MapPin className="absolute left-3 top-3.5 text-blue-500" size={18} />
               <input
                 type="text"
                 placeholder="Location..."
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border-2 border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 border-2 border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
           </div>
 
-          {/* Job Type Filter */}
           <div>
             <select
               value={jobType}
               onChange={(e) => setJobType(e.target.value)}
-              className="w-full px-4 py-3 border-2 border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-blue-900"
+              className="w-full px-4 py-3 border-2 border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-blue-900"
             >
               <option>All</option>
               <option>Full-time</option>
@@ -171,119 +168,105 @@ function JobSearch() {
           </div>
         </div>
 
-        {/* Search Button */}
         <button
           onClick={handleSearch}
-          className="mt-6 w-full md:w-auto bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-3 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          className="mt-4 w-full md:w-auto bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-3 rounded-lg font-semibold shadow-md active:scale-95 transition-transform"
         >
-          <Search className="inline mr-2 bg-none" size={18} />
+          <Search className="inline mr-2" size={18} />
           Search Jobs
         </button>
       </div>
 
-      {/* Results Count */}
-      {!isLoading && jobs.length > 0 && (
-        <div className="mb-4 text-blue-700 font-medium">
-          Found {jobs.length} job{jobs.length !== 1 ? 's' : ''}
-        </div>
-      )}
+      {/* Results Container */}
+      <div className="max-w-4xl mx-auto">
+        {!isLoading && jobs.length > 0 && (
+          <div className="mb-4 text-blue-700 font-medium px-2">
+            Found {jobs.length} job{jobs.length !== 1 ? 's' : ''}
+          </div>
+        )}
 
-      {/* Job Listings */}
-      <div className="space-y-5">
-        {isLoading ? (
-          <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-blue-700 font-medium">Loading amazing opportunities...</p>
-          </div>
-        ) : jobs.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-md p-12 text-center">
-            <div className="text-blue-300 mb-4">
-              <Briefcase size={64} className="mx-auto" />
+        <div className="space-y-4">
+          {isLoading ? (
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-blue-700">Loading opportunities...</p>
             </div>
-            <p className="text-blue-700 text-lg font-medium">No jobs found</p>
-            <p className="text-blue-500 mt-2">Try adjusting your search criteria</p>
-          </div>
-        ) : (
-          jobs.map((job) => (
-            <div 
-              key={job._id} 
-              className="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all p-6 border-l-4 border-blue-500 hover:border-blue-600 transform hover:-translate-y-1"
-            >
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  {/* Job Title & Company */}
-                  <div className="mb-4">
-                    <h3 className="text-2xl font-bold text-blue-900 mb-2 hover:text-blue-700 transition">
+          ) : jobs.length === 0 ? (
+            <div className="bg-white rounded-2xl p-10 text-center shadow-sm">
+              <Briefcase size={48} className="mx-auto text-blue-200 mb-4" />
+              <p className="text-blue-700 font-medium">No jobs found</p>
+            </div>
+          ) : (
+            jobs.map((job) => (
+              <div 
+                key={job._id} 
+                className="bg-white rounded-2xl shadow-md p-5 md:p-6 border-l-4 border-blue-500 hover:shadow-lg transition-shadow"
+              >
+                <div className="flex justify-between items-start">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-xl md:text-2xl font-bold text-blue-900 mb-1 truncate">
                       {job.title}
                     </h3>
-                    <p className="text-blue-600 font-semibold text-lg">{job.company}</p>
-                  </div>
-                  
-                  {/* Job Meta Info */}
-                  <div className="flex flex-wrap gap-4 mb-4">
-                    <span className="flex items-center gap-2 text-sm bg-blue-50 text-blue-700 px-3 py-1.5 rounded-lg">
-                      <MapPin size={16} />
-                      {job.location}
-                    </span>
-                    <span className="flex items-center gap-2 text-sm bg-blue-50 text-blue-700 px-3 py-1.5 rounded-lg">
-                      <Briefcase size={16} />
-                      {job.jobType}
-                    </span>
-                    <span className="flex items-center gap-2 text-sm bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1.5 rounded-lg font-semibold shadow-sm">
-                      <DollarSign size={16} />
-                      {job.salary}
-                    </span>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-gray-700 mb-4 leading-relaxed line-clamp-2">
-                    {job.description}
-                  </p>
-
-                  {/* Requirements Tags */}
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {job.requirements.slice(0, 5).map((req, index) => (
-                      <span 
-                        key={index} 
-                        className="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm font-medium border border-blue-300"
-                      >
-                        {req}
+                    <p className="text-blue-600 font-semibold mb-4">{job.company}</p>
+                    
+                    {/* Meta Tags - Wrap on Mobile */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <span className="flex items-center gap-1.5 text-xs md:text-sm bg-blue-50 text-blue-700 px-2.5 py-1 rounded-md">
+                        <MapPin size={14} /> {job.location}
                       </span>
-                    ))}
+                      <span className="flex items-center gap-1.5 text-xs md:text-sm bg-blue-50 text-blue-700 px-2.5 py-1 rounded-md">
+                        <Briefcase size={14} /> {job.jobType}
+                      </span>
+                      <span className="flex items-center gap-1.5 text-xs md:text-sm bg-blue-600 text-white px-2.5 py-1 rounded-md font-medium">
+                        <DollarSign size={14} /> {job.salary}
+                      </span>
+                    </div>
+
+                    <p className="text-gray-600 text-sm md:text-base mb-4 line-clamp-2">
+                      {job.description}
+                    </p>
+
+                    {/* Requirements Tags - Hidden on very small screens or scrollable */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {job.requirements.slice(0, 3).map((req, index) => (
+                        <span key={index} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                          {req}
+                        </span>
+                      ))}
+                    </div>
                   </div>
+
+                  <button
+                    onClick={() => handleSaveJob(job._id)}
+                    className="ml-2 p-2 hover:bg-blue-50 rounded-full"
+                  >
+                    {savedJobs.includes(job._id) ? (
+                      <BookmarkCheck size={24} className="text-blue-600" />
+                    ) : (
+                      <Bookmark size={24} className="text-blue-300" />
+                    )}
+                  </button>
                 </div>
 
-                {/* Bookmark Icon */}
-                <button
-                  onClick={() => handleSaveJob(job._id)}
-                  className="ml-4 p-2 rounded-lg hover:bg-blue-50 transition"
-                >
-                  {savedJobs.includes(job._id) ? (
-                    <BookmarkCheck size={28} className="text-blue-600" />
-                  ) : (
-                    <Bookmark size={28} className="text-blue-400 hover:text-blue-600" />
-                  )}
-                </button>
+                {/* Responsive Actions - Stacked on Mobile */}
+                <div className="flex flex-col sm:flex-row gap-3 mt-4 pt-4 border-t border-gray-100">
+                  <button
+                    onClick={() => handleApply(job._id)}
+                    className="flex-1 bg-blue-600 text-white px-6 py-2.5 rounded-lg font-bold hover:bg-blue-700 transition-colors"
+                  >
+                    Apply Now
+                  </button>
+                  <button className="flex-1 border-2 border-blue-600 text-blue-600 px-6 py-2.5 rounded-lg font-bold hover:bg-blue-50 transition-colors">
+                    View Details
+                  </button>
+                </div>
               </div>
-
-              {/* Actions */}
-              <div className="flex gap-3 mt-5 pt-5 border-t border-blue-100">
-                <button
-                  onClick={() => handleApply(job._id)}
-                  className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all font-semibold shadow-md hover:shadow-lg"
-                >
-                  Apply Now
-                </button>
-                <button className="border-2 border-blue-500 text-blue-700 px-6 py-3 rounded-lg hover:bg-blue-50 transition font-semibold">
-                  View Details
-                </button>
-              </div>
-            </div>
-          ))
-        )}
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
-export {JobSearch};
+export { JobSearch };
