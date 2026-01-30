@@ -147,197 +147,115 @@ function Applications() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-blue-100 to-blue-200 p-8">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-blue-100 to-blue-200 p-4 md:p-8">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-3">
+      <div className="mb-8 text-center md:text-left">
+        <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-3">
           My Applications
         </h1>
-        <p className="text-blue-700 text-lg">Track your job application journey</p>
+        <p className="text-blue-700 text-sm md:text-lg">Track your job application journey</p>
       </div>
 
-      {/* Statistics Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-        <div className="bg-white rounded-xl shadow-md p-4 border-t-4 border-blue-500">
-          <p className="text-gray-600 text-sm mb-1">Total</p>
-          <p className="text-3xl font-bold text-blue-600">{stats.total}</p>
-        </div>
-
-        <div className="bg-white rounded-xl shadow-md p-4 border-t-4 border-blue-400">
-          <p className="text-gray-600 text-sm mb-1">Applied</p>
-          <p className="text-3xl font-bold text-blue-500">{stats.applied}</p>
-        </div>
-
-        <div className="bg-white rounded-xl shadow-md p-4 border-t-4 border-yellow-400">
-          <p className="text-gray-600 text-sm mb-1">Under Review</p>
-          <p className="text-3xl font-bold text-yellow-600">{stats.underReview}</p>
-        </div>
-
-        <div className="bg-white rounded-xl shadow-md p-4 border-t-4 border-green-400">
-          <p className="text-gray-600 text-sm mb-1">Shortlisted</p>
-          <p className="text-3xl font-bold text-green-600">{stats.shortlisted}</p>
-        </div>
-
-        <div className="bg-white rounded-xl shadow-md p-4 border-t-4 border-red-400">
-          <p className="text-gray-600 text-sm mb-1">Rejected</p>
-          <p className="text-3xl font-bold text-red-600">{stats.rejected}</p>
-        </div>
-
-        <div className="bg-white rounded-xl shadow-md p-4 border-t-4 border-green-500">
-          <p className="text-gray-600 text-sm mb-1">Accepted</p>
-          <p className="text-3xl font-bold text-green-700">{stats.accepted}</p>
-        </div>
+      {/* Statistics Cards - Responsive Grid (2 columns on mobile, 3 on tablet, 6 on desktop) */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4 mb-8">
+        {[
+          { label: 'Total', value: stats.total, color: 'border-blue-500', text: 'text-blue-600' },
+          { label: 'Applied', value: stats.applied, color: 'border-blue-400', text: 'text-blue-500' },
+          { label: 'Under Review', value: stats.underReview, color: 'border-yellow-400', text: 'text-yellow-600' },
+          { label: 'Shortlisted', value: stats.shortlisted, color: 'border-green-400', text: 'text-green-600' },
+          { label: 'Rejected', value: stats.rejected, color: 'border-red-400', text: 'text-red-600' },
+          { label: 'Accepted', value: stats.accepted, color: 'border-green-500', text: 'text-green-700' },
+        ].map((stat, i) => (
+          <div key={i} className={`bg-white rounded-xl shadow-sm p-3 md:p-4 border-t-4 ${stat.color}`}>
+            <p className="text-gray-500 text-xs md:text-sm mb-1 uppercase font-bold tracking-wider">{stat.label}</p>
+            <p className={`text-2xl md:text-3xl font-bold ${stat.text}`}>{stat.value}</p>
+          </div>
+        ))}
       </div>
 
-      {/* Filter Bar */}
-      <div className="bg-white rounded-xl shadow-md p-4 mb-6 border-l-4 border-blue-500">
-        <div className="flex flex-wrap gap-3">
-          <button
-            onClick={() => setStatusFilter('All')}
-            className={`px-4 py-2 rounded-lg font-medium transition ${
-              statusFilter === 'All'
-                ? 'bg-blue-600 text-white shadow-md'
-                : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
-            }`}
-          >
-            All ({stats.total})
-          </button>
-
-          <button
-            onClick={() => setStatusFilter('Applied')}
-            className={`px-4 py-2 rounded-lg font-medium transition ${
-              statusFilter === 'Applied'
-                ? 'bg-blue-500 text-white shadow-md'
-                : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
-            }`}
-          >
-            Applied ({stats.applied})
-          </button>
-
-          <button
-            onClick={() => setStatusFilter('Under Review')}
-            className={`px-4 py-2 rounded-lg font-medium transition ${
-              statusFilter === 'Under Review'
-                ? 'bg-yellow-500 text-white shadow-md'
-                : 'bg-yellow-50 text-yellow-700 hover:bg-yellow-100'
-            }`}
-          >
-            Under Review ({stats.underReview})
-          </button>
-
-          <button
-            onClick={() => setStatusFilter('Shortlisted')}
-            className={`px-4 py-2 rounded-lg font-medium transition ${
-              statusFilter === 'Shortlisted'
-                ? 'bg-green-500 text-white shadow-md'
-                : 'bg-green-50 text-green-700 hover:bg-green-100'
-            }`}
-          >
-            Shortlisted ({stats.shortlisted})
-          </button>
-
-          <button
-            onClick={() => setStatusFilter('Rejected')}
-            className={`px-4 py-2 rounded-lg font-medium transition ${
-              statusFilter === 'Rejected'
-                ? 'bg-red-500 text-white shadow-md'
-                : 'bg-red-50 text-red-700 hover:bg-red-100'
-            }`}
-          >
-            Rejected ({stats.rejected})
-          </button>
-
-          <button
-            onClick={() => setStatusFilter('Accepted')}
-            className={`px-4 py-2 rounded-lg font-medium transition ${
-              statusFilter === 'Accepted'
-                ? 'bg-green-600 text-white shadow-md'
-                : 'bg-green-50 text-green-700 hover:bg-green-100'
-            }`}
-          >
-            Accepted ({stats.accepted})
-          </button>
+      {/* Filter Bar - Horizontal Scroll on Mobile */}
+      <div className="bg-white rounded-xl shadow-md p-2 md:p-4 mb-6 border-l-4 border-blue-500">
+        <div className="flex overflow-x-auto pb-2 md:pb-0 no-scrollbar gap-2 md:flex-wrap">
+          {['All', 'Applied', 'Under Review', 'Shortlisted', 'Rejected', 'Accepted'].map((status) => (
+            <button
+              key={status}
+              onClick={() => setStatusFilter(status)}
+              className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm md:text-base font-medium transition flex-shrink-0 ${
+                statusFilter === status
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+              }`}
+            >
+              {status} ({status === 'All' ? stats.total : stats[status.charAt(0).toLowerCase() + status.slice(1).replace(' ', '')]})
+            </button>
+          ))}
         </div>
       </div>
 
       {/* Applications List */}
-      <div className="space-y-5">
+      <div className="max-w-5xl mx-auto space-y-4">
         {isLoading ? (
           <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-blue-700 font-medium">Loading your applications...</p>
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-blue-700">Fetching applications...</p>
           </div>
         ) : filteredApplications.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-md p-12 text-center">
-            <div className="text-blue-300 mb-4">
-              <FileText size={64} className="mx-auto" />
-            </div>
-            <p className="text-blue-700 text-lg font-medium">No applications found</p>
-            <p className="text-blue-500 mt-2">
-              {statusFilter === 'All' 
-                ? 'Start applying to jobs to see them here!'
-                : `No applications with status "${statusFilter}"`}
-            </p>
+          <div className="bg-white rounded-2xl shadow-md p-10 text-center">
+            <FileText size={48} className="mx-auto text-blue-200 mb-4" />
+            <p className="text-blue-800 font-semibold">No applications found</p>
           </div>
         ) : (
           filteredApplications.map((app) => (
             <div
               key={app._id}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all p-6 border-l-4 border-blue-500"
+              className="bg-white rounded-2xl shadow-md p-5 md:p-6 border-l-4 border-blue-500 hover:shadow-lg transition-shadow"
             >
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex-1">
-                  {/* Job Title & Company */}
-                  <h3 className="text-2xl font-bold text-blue-900 mb-2">
+              <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
+                <div className="flex-1 w-full">
+                  <h3 className="text-xl md:text-2xl font-bold text-blue-900 mb-1 leading-tight">
                     {app.jobId?.title || 'Job Title'}
                   </h3>
-                  <div className="flex items-center gap-2 text-blue-600 font-semibold mb-3">
-                    <Building2 size={18} />
+                  <div className="flex items-center gap-2 text-blue-600 font-semibold text-sm md:text-base mb-3">
+                    <Building2 size={16} />
                     <span>{app.jobId?.company || 'Company'}</span>
                   </div>
 
-                  {/* Job Details */}
-                  <div className="flex flex-wrap gap-3 mb-4">
-                    <span className="flex items-center gap-2 text-sm bg-blue-50 text-blue-700 px-3 py-1.5 rounded-lg">
-                      <MapPin size={16} />
-                      {app.jobId?.location || 'Location'}
+                  {/* Metadata Tags */}
+                  <div className="flex flex-wrap gap-2">
+                    <span className="flex items-center gap-1.5 text-xs bg-blue-50 text-blue-700 px-2.5 py-1.5 rounded-lg">
+                      <MapPin size={14} /> {app.jobId?.location}
                     </span>
-                    <span className="flex items-center gap-2 text-sm bg-blue-50 text-blue-700 px-3 py-1.5 rounded-lg">
-                      <Briefcase size={16} />
-                      {app.jobId?.jobType || 'Job Type'}
-                    </span>
-                    <span className="flex items-center gap-2 text-sm bg-blue-50 text-blue-700 px-3 py-1.5 rounded-lg">
-                      <Calendar size={16} />
-                      Applied on {formatDate(app.appliedDate)}
+                    <span className="flex items-center gap-1.5 text-xs bg-blue-50 text-blue-700 px-2.5 py-1.5 rounded-lg">
+                      <Calendar size={14} /> {formatDate(app.appliedDate)}
                     </span>
                   </div>
                 </div>
 
-                {/* Status Badge */}
-                <div className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold border-2 ${getStatusColor(app.status)}`}>
+                {/* Status Badge - Auto-width on mobile */}
+                <div className={`flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full md:rounded-lg text-xs md:text-sm font-bold border ${getStatusColor(app.status)}`}>
                   {getStatusIcon(app.status)}
-                  <span>{app.status}</span>
+                  <span className="uppercase">{app.status}</span>
                 </div>
               </div>
 
-              {/* Cover Letter Preview */}
+              {/* Cover Letter Preview - Compact on Mobile */}
               {app.coverLetter && (
-                <div className="mb-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                  <p className="text-sm font-semibold text-blue-900 mb-2">Cover Letter:</p>
-                  <p className="text-sm text-gray-700 line-clamp-2">{app.coverLetter}</p>
+                <div className="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                  <p className="text-[10px] uppercase font-black text-blue-400 mb-1">Cover Letter Snippet</p>
+                  <p className="text-sm text-gray-700 line-clamp-2 italic">"{app.coverLetter}"</p>
                 </div>
               )}
 
-              {/* Actions */}
-              <div className="flex gap-3 pt-4 border-t border-blue-100">
-                <button className="flex-1 border-2 border-blue-500 text-blue-700 px-6 py-2 rounded-lg hover:bg-blue-50 transition font-semibold">
+              {/* Action Buttons - Stack on mobile */}
+              <div className="flex flex-col sm:flex-row gap-2 pt-4 border-t border-gray-100">
+                <button className="flex-1 bg-white border-2 border-blue-600 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition font-bold text-sm">
                   View Job Details
                 </button>
                 
                 {['Applied', 'Under Review'].includes(app.status) && (
                   <button
                     onClick={() => handleWithdraw(app._id)}
-                    className="flex items-center gap-2 bg-red-50 border-2 border-red-500 text-red-700 px-6 py-2 rounded-lg hover:bg-red-100 transition font-semibold"
+                    className="flex items-center justify-center gap-2 bg-red-50 text-red-600 px-4 py-2 rounded-lg hover:bg-red-100 transition font-bold text-sm border-2 border-transparent"
                   >
                     <Trash2 size={16} />
                     Withdraw
