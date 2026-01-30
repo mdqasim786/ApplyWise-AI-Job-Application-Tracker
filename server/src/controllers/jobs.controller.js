@@ -155,3 +155,30 @@ export const getMyApplications = async (req, res) => {
     return res.status(500).json({ message: "Server error" });
   }
 };
+
+// Withdraw/delete an application
+export const withdrawApplication = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const { applicationId } = req.params;
+
+    const application = await Application.findOne({ _id: applicationId, userId });
+
+    if (!application) {
+      return res.status(404).json({ message: "Application not found" });
+    }
+
+    // Only allow withdrawal if status is "Applied" or "Under Review"
+    if (!['Applied', 'Under Review'].includes(application.status)) {
+      return res.status(400).json({ 
+        message: "Cannot withdraw application at this stage" 
+      });
+    }
+
+    await Application.findByIdAndDelete(applicationId);
+
+    return res.status(200).json({ message: "Application withdrawn" });
+  } catch (error) {
+    return res.status(500).json({ message: "Server error" });
+  }
+};

@@ -7,7 +7,8 @@ import {
   unsaveJob,
   getSavedJobs,
   applyToJob,
-  getMyApplications
+  getMyApplications,
+  withdrawApplication 
 } from '../controllers/jobs.controller.js';
 
 const router = express.Router();
@@ -22,5 +23,6 @@ router.delete('/save/:jobId', authMiddleware, unsaveJob);
 router.get('/saved/all', authMiddleware, getSavedJobs);
 router.post('/apply', authMiddleware, applyToJob);
 router.get('/applications/my', authMiddleware, getMyApplications);
+router.delete('/applications/:applicationId', authMiddleware, withdrawApplication);
 
 export default router;
