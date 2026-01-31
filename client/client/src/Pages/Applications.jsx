@@ -147,7 +147,7 @@ function Applications() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-blue-100 to-blue-200 p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-blue-200 to-blue-200 p-4 md:p-8">
       {/* Header */}
       <div className="mb-8 text-center md:text-left">
         <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-3">
